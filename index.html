@@ -1,1 +1,168 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: hotpink;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 8fr;
+            grid-template-rows: 1fr 2fr 2fr 1fr;
+            grid-template-areas:
+                "title main"
+                "sidebar1 main"
+                "sidebar2 main"
+                "sidebar3 main"
+        }
+
+        .title,
+        .sidebar1,
+        .sidebar2,
+        .sidebar3 {
+            background-color: rgb(59, 59, 59);
+            color: white;
+            padding: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        li {
+            list-style: square;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .title {
+            grid-area: title;
+        }
+
+        .sidebar1 {
+            grid-area: sidebar1;
+        }
+
+        .sidebar2 {
+            grid-area: sidebar2;
+        }
+
+        .sidebar3 {
+            grid-area: sidebar3;
+        }
+
+        .main {
+            grid-area: main;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 500px;
+            text-align: center;
+        }
+
+        td {
+            border-bottom: 3px solid rgb(59, 59, 59);
+            padding: 10px;
+        }
+
+        .index {
+            text-align: center;
+        }
+    </style>
+    <script>
+        function opencate(catename) {
+            fetch("category/" + catename)
+                .then((response) => response.text())
+                .then((text) => showcate(catename, text))
+        }
+        function showcate(catename, text) {
+            assembled = "";
+            cate = text.split(',')
+            for (i = 0; i < cate.length; i++) {
+                assembled += "<li><a href='javascript: void (0);' onclick='openlist(this.innerHTML)'>" + cate[i] + "</a></li>"
+            }
+            document.getElementById(catename + "_ul").innerHTML = assembled;
+            document.getElementById(catename + "_a").setAttribute('onclick', 'closecate(this.innerHTML)');
+        }
+        function closecate(catename) {
+            document.getElementById(catename + "_ul").innerHTML = "";
+            document.getElementById(catename + "_a").setAttribute('onclick', 'opencate(this.innerHTML)');
+        }
+        function openlist(listname) {
+            fetch("list/" + listname)
+                .then((response) => response.text())
+                .then((text) => showpost(text))
+        }
+        function showlist(text) {
+            document.getElementById('main').innerHTML = text;
+        }
+        function openpost(postname) {
+            fetch("post/" + postname)
+                .then((response) => response.text())
+                .then((text) => showpost(text))
+        }
+        function showpost(text) {
+            document.getElementById('main').innerHTML = text;
+        }
+    </script>
+</head>
+
+<body>
+    <div class=container>
+        <div class=title>
+            <h1><a href="index.html" style="color:white">TOY BLOG</a></h1>
+            <h3>ㅤ</h3>
+        </div>
+        <div class=sidebar1>
+            Category
+            <hr>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="opencate(this.innerHTML);" id=Daily_a>Daily</a>
+                    <ul id=Daily_ul></ul>
+                </li>
+                <li><a href="javascript:void(0);" onclick="opencate(this.innerHTML);" id=Develop_a>Develop</a>
+                    <ul id=Develop_ul></ul>
+                </li>
+                <li><a href="javascript:void(0);" onclick="opencate(this.innerHTML);" id=Language_a>Language</a>
+                    <ul id=Language_ul></ul>
+                </li>
+            </ul>
+        </div>
+        <div class=sidebar2>
+            Profile
+            <hr>
+            염수경<br>
+            1998.02.20<br>
+            Yonsei University<br>
+            Unity, Dev, Webhacking<br>
+        </div>
+        <div class=sidebar3>
+            Contact ✉
+            <hr>
+            bepolar@tistory.com
+            choco4study@tistory.com
+            sookyeong.dev@gmail.com
+        </div>
+        <div class=main id=main>
+            <div class=index>
+                <h1>Intro</h1>
+                <img src="asset/1.jpg" width=1000px>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

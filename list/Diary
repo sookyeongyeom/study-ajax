@@ -1,0 +1,11 @@
+<h1>Diary</h1>
+<table>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href="javascript:void(0);" onclick="openpost(this.innerHTML)">깃헙 블로그 개설</a></td>
+            <td>Diary</td>
+            <td>22.01.27</td>
+        </tr>
+    </tbody>
+</table>
