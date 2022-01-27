@@ -1,0 +1,11 @@
+<h1>Python</h1>
+<table>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><a href="javascript:void(0);" onclick="openpost(this.innerHTML)">Python 커리큘럼</a></td>
+            <td>Python</td>
+            <td>22.01.27</td>
+        </tr>
+    </tbody>
+</table>
